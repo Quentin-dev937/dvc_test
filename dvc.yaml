@@ -1,0 +1,9 @@
+stages:
+  processing:
+    cmd: python src/processing.py data/raw/titanic.csv 
+      data/processed/titanic.csv
+    deps:
+    - data/raw/titanic.csv
+    - src/processing.py
+    outs:
+    - data/processed/titanic.csv
