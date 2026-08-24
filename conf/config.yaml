@@ -1,0 +1,7 @@
+defaults:
+  - _self_
+
+data:
+  path:
+    raw: "data/raw/titanic.csv"
+    processed: "data/processed/titanic.csv"

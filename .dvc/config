@@ -1,0 +1,8 @@
+[core]
+    remote = local_storage
+[hydra]
+    enabled = True
+['remote "local_folder"']
+    url = ../local_folder
+['remote "local_storage"']
+    url = ../local_storage
