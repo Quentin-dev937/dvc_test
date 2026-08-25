@@ -10,7 +10,7 @@ def main():
     dataframe = pd.read_csv(cfg.data.path.raw)
     print("Dataframe shape:", dataframe.shape)
 
-    dataframe_trunc = dataframe[cfg.data.processing.columns_to_remove].reset_index(drop=True)
+    dataframe_trunc = dataframe.drop(columns=cfg.data.processing.columns_to_remove).reset_index(drop=True)
     
     dataframe_trunc.to_csv(cfg.data.path.processed, index=False)
     print("Dataframe processed saved !")
