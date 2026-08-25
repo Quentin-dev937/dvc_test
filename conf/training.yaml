@@ -1,0 +1,8 @@
+training:
+  test_size: 0.2
+  target_col: "Survived"
+  max_depth: 4
+  impute_num_strategy: median
+  impute_cat_strategy: most_frequent
+  n_split: 3
+  scoring: f1_score

@@ -4,4 +4,8 @@ data:
     processed: "data/processed/titanic.csv"
 
   processing:
-    columns_to_remove: ["Name", "Age", "Ticket", "Cabin"]
+    columns_to_remove: 
+      - Name
+      - Ticket
+      - Cabin
+      - PassengerId

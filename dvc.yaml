@@ -7,3 +7,8 @@ stages:
     - src/processing.py
     outs:
     - data/processed/titanic.csv
+  training:
+    cmd: python src/training.py data/processed/titanic.csv
+    deps:
+    - data/processed/titanic.csv
+    - src/training.py
