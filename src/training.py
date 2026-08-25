@@ -30,10 +30,10 @@ def train():
 
     pipeline = make_pipeline(columns_transformer, rfc)
 
-    rfc_scores = -cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
+    rfc_scores = cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
 
 
-    print(f"Accuracy: {rfc_scores}", flush=True)
+    print(f"Scoring: {rfc_scores}", flush=True)
 
 
 if __name__ == "__main__":
