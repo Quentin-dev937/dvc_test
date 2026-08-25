@@ -2,3 +2,6 @@ data:
   path:
     raw: "data/raw/titanic.csv"
     processed: "data/processed/titanic.csv"
+
+  processing:
+    columns_to_remove: ["Name", "Age", "Ticket", "Cabin"]

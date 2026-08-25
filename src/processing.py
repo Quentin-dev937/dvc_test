@@ -8,9 +8,12 @@ def main():
     cfg = OmegaConf.load("params.yaml")
     
     dataframe = pd.read_csv(cfg.data.path.raw)
+    print("Dataframe shape:", dataframe.shape)
+
+    dataframe_trunc = dataframe[cfg.data.processing.columns_to_remove].reset_index(drop=True)
     
-    dataframe.to_csv(cfg.data.path.processed, index=False)
-    
+    dataframe_trunc.to_csv(cfg.data.path.processed, index=False)
+    print("Dataframe processed saved !")
 
    
 if __name__ == "__main__":
