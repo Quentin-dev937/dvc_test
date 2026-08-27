@@ -13,8 +13,8 @@ data:
 training:
   test_size: 0.2
   target_col: Survived
-  max_depth: 5
+  max_depth: 3
   impute_num_strategy: median
   impute_cat_strategy: most_frequent
-  n_split: 3
+  n_split: 5
   scoring: f1_macro

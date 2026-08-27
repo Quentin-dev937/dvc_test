@@ -5,6 +5,7 @@ stages:
     deps:
     - data/raw/titanic.csv
     - src/processing.py
+    - conf/
     outs:
     - data/processed/titanic.csv
   training:
@@ -12,3 +13,4 @@ stages:
     deps:
     - data/processed/titanic.csv
     - src/training.py
+    - conf/

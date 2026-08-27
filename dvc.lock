@@ -4,6 +4,11 @@ stages:
     cmd: python src/processing.py data/raw/titanic.csv 
       data/processed/titanic.csv
     deps:
+    - path: conf/
+      hash: md5
+      md5: 6a32a9b06f645ab1e3313e6f52163959.dir
+      size: 465
+      nfiles: 3
     - path: data/raw/titanic.csv
       hash: md5
       md5: 2309cc5f04782ed9bb6016d9f4e381cf
@@ -20,11 +25,16 @@ stages:
   training:
     cmd: python src/training.py data/processed/titanic.csv
     deps:
+    - path: conf/
+      hash: md5
+      md5: 6a32a9b06f645ab1e3313e6f52163959.dir
+      size: 465
+      nfiles: 3
     - path: data/processed/titanic.csv
       hash: md5
       md5: c631dc9ae26dd14bb539a6d7ede00e95
       size: 24074
     - path: src/training.py
       hash: md5
-      md5: abaef163933df3daa8c85a8bd4631363
-      size: 2101
+      md5: c0a51a95d6e2db838f5d5d474ab92269
+      size: 2144

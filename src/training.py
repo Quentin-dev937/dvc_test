@@ -41,7 +41,7 @@ def train():
         rfc_scores = cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
         rfc_scores_mean = np.mean(rfc_scores)
 
-        mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]])
+        mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name="titanic-rfc-model")
         mlflow.log_param("f1-macro-mean", rfc_scores_mean)
         mlflow.log_param("cv", cfg.training.n_split)
         mlflow.log_param("rfc-max_depth", cfg.training.max_depth)
