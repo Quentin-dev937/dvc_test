@@ -6,7 +6,7 @@ stages:
     deps:
     - path: conf/
       hash: md5
-      md5: 6a32a9b06f645ab1e3313e6f52163959.dir
+      md5: a949470c2e41426ef77be35a4ec5f499.dir
       size: 465
       nfiles: 3
     - path: data/raw/titanic.csv
@@ -27,7 +27,7 @@ stages:
     deps:
     - path: conf/
       hash: md5
-      md5: 6a32a9b06f645ab1e3313e6f52163959.dir
+      md5: a949470c2e41426ef77be35a4ec5f499.dir
       size: 465
       nfiles: 3
     - path: data/processed/titanic.csv
@@ -36,5 +36,5 @@ stages:
       size: 24074
     - path: src/training.py
       hash: md5
-      md5: c0a51a95d6e2db838f5d5d474ab92269
-      size: 2144
+      md5: 8c704ff54900aba58bdd48b84518fc76
+      size: 2164

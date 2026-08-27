@@ -16,10 +16,9 @@ import mlflow
 def train():
     cfg = OmegaConf.load("params.yaml")
 
-
     remote_server_uri = "sqlite:///mlflow.db"
     mlflow.set_tracking_uri(remote_server_uri)
-    mlflow.set_experiment("titanic-mlops")
+    mlflow.set_experiment("titanic-mlops-1")
 
     dataframe = pd.read_csv(cfg.data.path.processed)
 
@@ -32,19 +31,21 @@ def train():
     columns_transformer = make_column_transformer((num_pipeline, make_column_selector(dtype_include=np.number)),
                                                   (cat_pipeline, make_column_selector(dtype_include=object)))
 
-
     rfc = RandomForestClassifier(max_depth=cfg.training.max_depth, random_state=cfg.reproductibility.random_state)
 
+    pipeline = make_pipeline(columns_transformer, rfc)
+
     with mlflow.start_run():
-        pipeline = make_pipeline(columns_transformer, rfc)
 
         rfc_scores = cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
-        rfc_scores_mean = np.mean(rfc_scores)
-
-        mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name="titanic-rfc-model")
-        mlflow.log_param("f1-macro-mean", rfc_scores_mean)
         mlflow.log_param("cv", cfg.training.n_split)
         mlflow.log_param("rfc-max_depth", cfg.training.max_depth)
+
+        rfc_scores_mean = np.mean(rfc_scores)
+        mlflow.log_metric("f1-macro-mean", rfc_scores_mean)
+        
+        pipeline.fit(X, y)
+        mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name=None)
 
         print(f"scoring mean: {rfc_scores}", flush=True)
 
