@@ -4,16 +4,24 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 
 
+def load_data(path):
+    return pd.read_csv(path)
+
+def process_data(dataframe, columns_to_remove):
+    return dataframe.drop(columns=columns_to_remove).reset_index(drop=True)
+
+def save_data(dataframe, path):
+    dataframe.to_csv(path, index=False)
+
+
 def processing():
     cfg = OmegaConf.load("params.yaml")
     
-    dataframe = pd.read_csv(cfg.data.path.raw)
-    print("Dataframe shape:", dataframe.shape, flush=True)
+    dataframe = load_data(path=cfg.data.path.raw)
 
-    dataframe_trunc = dataframe.drop(columns=cfg.data.processing.columns_to_remove).reset_index(drop=True)
-    
-    dataframe_trunc.to_csv(cfg.data.path.processed, index=False)
-    print("Dataframe processed saved !", flush=True)
+    dataframe_trunc = process_data(dataframe=dataframe, columns_to_remove=cfg.data.processing.columns_to_remove)
+
+    save_data(dataframe=dataframe_trunc, path=cfg.data.path.processed)
 
    
 if __name__ == "__main__":
