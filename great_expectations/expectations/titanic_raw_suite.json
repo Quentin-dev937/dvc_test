@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "id": "d7313032-edf1-4ff0-a2fb-ccc289544829",
+      "kwargs": {
+        "value": 12
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_column_count_to_equal"
+    },
+    {
+      "id": "610947c7-9b0c-40e1-aa4c-d1646d0d65e6",
+      "kwargs": {
+        "column": "Pclass",
+        "value_set": [
+          1,
+          2,
+          3
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "8f821793-891c-418c-a1c5-120c70e4a913",
+      "kwargs": {
+        "column_list": [
+          "PassengerId",
+          "Survived",
+          "Pclass",
+          "Name",
+          "Sex",
+          "Age",
+          "SibSp",
+          "Parch",
+          "Ticket",
+          "Fare",
+          "Cabin",
+          "Embarked"
+        ]
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_table_columns_to_match_ordered_list"
+    }
+  ],
+  "id": "a9de7fd1-7929-43e4-8c3b-5f582a32d840",
+  "meta": {
+    "great_expectations_version": "1.18.1"
+  },
+  "name": "titanic_raw_suite",
+  "notes": null
+}
