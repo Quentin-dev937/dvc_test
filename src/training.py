@@ -11,8 +11,15 @@ from sklearn.impute import SimpleImputer
 import hydra
 from omegaconf import DictConfig, OmegaConf
 
+import mlflow
+
 def train():
     cfg = OmegaConf.load("params.yaml")
+
+
+    remote_server_uri = "sqlite:///mlflow.db"
+    mlflow.set_tracking_uri(remote_server_uri)
+    mlflow.set_experiment("titanic-mlops")
 
     dataframe = pd.read_csv(cfg.data.path.processed)
 
@@ -28,12 +35,18 @@ def train():
 
     rfc = RandomForestClassifier(max_depth=cfg.training.max_depth, random_state=cfg.reproductibility.random_state)
 
-    pipeline = make_pipeline(columns_transformer, rfc)
+    with mlflow.start_run():
+        pipeline = make_pipeline(columns_transformer, rfc)
 
-    rfc_scores = cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
+        rfc_scores = cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
+        rfc_scores_mean = np.mean(rfc_scores)
 
+        mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]])
+        mlflow.log_param("f1-macro-mean", rfc_scores_mean)
+        mlflow.log_param("cv", cfg.training.n_split)
+        mlflow.log_param("rfc-max_depth", cfg.training.max_depth)
 
-    print(f"Scoring: {rfc_scores}", flush=True)
+        print(f"scoring mean: {rfc_scores}", flush=True)
 
 
 if __name__ == "__main__":

@@ -16,5 +16,5 @@ training:
   max_depth: 5
   impute_num_strategy: median
   impute_cat_strategy: most_frequent
-  n_split: 5
+  n_split: 3
   scoring: f1_macro
