@@ -1,4 +1,4 @@
-name: titanic-mlops CI
+name: titanic mlops CI
 
 on: 
   push: 
