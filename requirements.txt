@@ -1,0 +1,12 @@
+pandas
+numpy
+pytest
+scikit-learn
+pyyaml
+mlflow
+sqlalchemy
+great_expectations
+hydra-core
+dvc
+evidently
+nannyml
