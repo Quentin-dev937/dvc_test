@@ -1,0 +1,17 @@
+name: titanic-mlops CI
+
+on: 
+  push: 
+    branches: [main]
+
+
+jobs:
+  processing raw data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get python code
+        uses: actions/checkout@v6
+
+      - name: run on line
+        run: echo Ci done !
+      
