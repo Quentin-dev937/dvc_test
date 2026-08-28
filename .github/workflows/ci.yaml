@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  processing raw data:
+  processing:
     runs-on: ubuntu-latest
     steps:
       - name: get python code
