@@ -2,6 +2,7 @@ defaults:
   - _self_
   - data
   - training
+  - validation
 
 
 reproductibility:

@@ -83,17 +83,17 @@ data_docs_sites:
 fluent_datasources:
   titanic_datasource:
     type: pandas_filesystem
-    id: cb961254-5337-4789-9fc6-3579f28f67da
+    id: b203c2f0-3863-44b8-b766-eaeb85d40703
     assets:
       titanic_raw:
         type: csv
-        id: 3ca19d58-3ca8-439c-8389-4132ebda8fbd
+        id: 5042159a-eae4-48df-a1cb-ebe733e8de49
         batch_definitions:
           titanic.csv:
-            id: 61c97fbf-8486-49a9-8199-b536b1522d74
+            id: a7ced958-a3bc-4566-bf87-f9c454508587
             partitioner:
               regex: titanic.csv$
               param_names: []
     base_directory: data\raw
 analytics_enabled:
-data_context_id: 7cb09d15-6a18-4905-899f-1ef50d3d1017
+data_context_id: 985e7bce-8ebe-4d90-b053-f0168de35b2d
