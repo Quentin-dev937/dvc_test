@@ -8,10 +8,7 @@ from pathlib import Path
 @hydra.main(config_path="../conf", config_name="config", version_base=None)
 def validation(cfg: DictConfig):
 
-    # print(OmegaConf.to_yaml(cfg))
 
-    # data_path = cfg.data.path.raw
-    # ge_root_dir = cfg.gx.context_root_dir
     data_source = cfg.gx.data_source
     suite_name = cfg.gx.suite_name
     asset_name = cfg.gx.asset_name
