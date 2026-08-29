@@ -22,6 +22,12 @@ jobs:
           python -m pip install pip --upgrade
           pip install -r requirements.txt
 
+
+      - name: pull data with dvc
+        run: |
+          dvc pull
+          
+
       - name: validate data raw
         run: | 
           echo "Validation..."
