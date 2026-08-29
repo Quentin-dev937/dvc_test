@@ -22,6 +22,14 @@ jobs:
           python -m pip install pip --upgrade
           pip install -r requirements.txt
 
+      - name: validate data raw
+        run: | 
+          echo "Validation..."
+          python src/validation.py
+          echo "Validation successful !"
+
       - name: run tests
-        run: pytest tests/ -v
+        run: | 
+          echo "Testing..."
+          pytest tests/ -v
       
