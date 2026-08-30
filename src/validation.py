@@ -40,7 +40,7 @@ def validation():
     df = pd.read_csv(data_raw_path)
 
     batch_parameters_dataframe = {"path": df}
-    results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
+    results = validation_definition.run(batch_parameters=df)
 
 
     print(results["success"], flush=True)
