@@ -25,6 +25,8 @@ jobs:
 
       - name: pull data with dvc
         run: |
+          dvc remote modify --local r2remote access_key_id ${{ secrets.R2_ACCESS_KEY }}
+          dvc remote modify --local r2remote secret_access_key ${{ secrets.R2_SECRET_KEY }}
           dvc pull
           
 
