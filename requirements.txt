@@ -7,6 +7,6 @@ mlflow
 sqlalchemy
 great_expectations
 hydra-core
-dvc
+dvc[s3]
 evidently
 nannyml

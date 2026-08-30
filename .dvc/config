@@ -1,8 +1,11 @@
-[core]
-    remote = local_storage
 [hydra]
     enabled = True
+[core]
+    remote = r2remote
 ['remote "local_folder"']
     url = ../local_folder
 ['remote "local_storage"']
     url = ../local_storage
+['remote "r2remote"']
+    url = s3://mlops-titanic-data/raw
+    endpointurl = https://b5779d2444f708b74ea470848443cb58.r2.cloudflarestorage.com

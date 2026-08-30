@@ -2,3 +2,6 @@
 /mlruns
 /setup_gx.ipynb
 /outputs
+/.env
+/.dvc/config.local
+/.config
