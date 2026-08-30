@@ -28,16 +28,20 @@ def validation():
         print(f"❌ Erreur lors du chargement du contexte : {e}", flush=True)
         sys.exit(1)
 
+    try:
+        validation_definition = context.validation_definitions.get("titanic_raw_validation_definition")
+        print("✅ validation_definition chargé.", flush=True)
+    except Exception as e:
+        print(f"❌ Erreur lors du chargement validation_definition : {e}", flush=True)
+        sys.exit(1)
 
-    batch_definition = context.data_sources.get("titanic_datasource").get_asset("titanic_raw").get_batch_definition("titanic.csv")
-    print("✅ batch_definition", batch_definition, flush=True)
     suite = context.suites.get("titanic_raw_suite")
 
     df = pd.read_csv(data_raw_path)
 
-    batch = batch_definition.get_batch("titanic.csv")
+    batch_parameters_dataframe = {"dataframe": df}
+    results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
 
-    results = batch.validate(expect=suite)
 
     print(results["success"], flush=True)
 
