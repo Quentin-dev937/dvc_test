@@ -15,6 +15,7 @@ def validation():
     #batch_definition_name = cfg.gx.batch_definition_name
 
     context_root_dir = Path("great_expectations")
+    data_raw_path = Path("data/raw/titanic.csv")
     
     if not context_root_dir.exists():
         print(f"❌ Erreur: Le dossier {context_root_dir} n'existe pas.", flush=True)
@@ -30,7 +31,10 @@ def validation():
 
     batch_definition = context.data_sources.get("titanic_datasource").get_asset("titanic_raw").get_batch_definition("titanic.csv")
     suite = context.suites.get("titanic_raw_suite")
-    batch = batch_definition.get_batch()
+
+    df = pd.read_csv(data_raw_path)
+
+    batch = batch_definition.get_batch(batch_parameters={"dataframe": df})
 
     results = batch.validate(expect=suite)
 
