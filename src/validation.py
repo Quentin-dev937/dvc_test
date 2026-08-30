@@ -30,11 +30,12 @@ def validation():
 
 
     batch_definition = context.data_sources.get("titanic_datasource").get_asset("titanic_raw").get_batch_definition("titanic.csv")
+    print("✅ batch_definition", batch_definition, flush=True)
     suite = context.suites.get("titanic_raw_suite")
 
     df = pd.read_csv(data_raw_path)
 
-    batch = batch_definition.get_batch(batch_parameters={"dataframe": df})
+    batch = batch_definition.get_batch(batch_parameters=df)
 
     results = batch.validate(expect=suite)
 
