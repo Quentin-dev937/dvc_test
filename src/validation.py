@@ -35,7 +35,7 @@ def validation():
 
     df = pd.read_csv(data_raw_path)
 
-    batch = batch_definition.get_batch(batch_parameters=df)
+    batch = batch_definition.get_batch("titanic.csv")
 
     results = batch.validate(expect=suite)
 
