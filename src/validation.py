@@ -27,10 +27,10 @@ def validation():
         print(f"❌ Erreur lors du chargement du contexte : {e}", flush=True)
         sys.exit(1)
 
-        
+
     batch_definition = context.data_sources.get("titanic_datasource").get_asset("titanic_raw").get_batch_definition("titanic.csv")
-    batch = batch_definition.get_batch()
     suite = context.suites.get("titanic_raw_suite")
+    batch = batch_definition.get_batch()
 
     results = batch.validate(expect=suite)
 
