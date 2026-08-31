@@ -35,9 +35,20 @@ def validation():
         print(f"❌ Erreur lors du chargement validation_definition : {e}", flush=True)
         sys.exit(1)
 
-    suite = context.suites.get("titanic_raw_suite")
+    try:
+        suite = context.suites.get("titanic_raw_suite")
+        print("✅ suite chargée.", flush=True)
+    except Exception as e:
+        print(f"❌ Erreur lors du chargement suite : {e}", flush=True)
+        sys.exit(1)
 
-    df = pd.read_csv(data_raw_path)
+    try:
+        df = pd.read_csv(data_raw_path)
+        print("✅ df chargée.", flush=True)
+    except Exception as e:
+        print(f"❌ Erreur lors du chargement du dataframe : {e}", flush=True)
+        sys.exit(1)
+
 
     batch_parameters_dataframe = {"dataframe": df}
     results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
