@@ -47,7 +47,7 @@ def validation():
     validation_definition = context.validation_definitions.get("titanic_raw_validation_definition")
 
 
-    batch_parameters_dataframe = {"None": df}
+    batch_parameters_dataframe = {"path": data_raw_path}
     results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
 
 
