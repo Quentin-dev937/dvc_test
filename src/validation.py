@@ -22,19 +22,12 @@ def validation():
         sys.exit(1)
 
     try:
-        #context = gx.get_context(context_root_dir=str(context_root_dir))
-        context = gx.get_context()
+        context = gx.get_context(context_root_dir=str(context_root_dir))
         print("✅ Contexte Great Expectations chargé.", flush=True)
     except Exception as e:
         print(f"❌ Erreur lors du chargement du contexte : {e}", flush=True)
         sys.exit(1)
 
-    #try:
-    #    validation_definition = context.validation_definitions.get("titanic_raw_validation_definition")
-    #    print("✅ validation_definition chargé.", flush=True)
-    #except Exception as e:
-    #    print(f"❌ Erreur lors du chargement validation_definition : {e}", flush=True)
-    #    sys.exit(1)
 
     try:
         suite = context.suites.get("titanic_raw_suite")
@@ -50,25 +43,12 @@ def validation():
         print(f"❌ Erreur lors du chargement du dataframe : {e}", flush=True)
         sys.exit(1)
 
-    try:
-        batch_definition = context.data_sources.get("titanic_datasource").get_asset("titanic_raw").get_batch_definition("titanic.csv")
-        print("✅ batch_definition chargé.", flush=True)
-    except Exception as e:
-        print(f"❌ Erreur lors du chargement batch_definition : {e}", flush=True)
-        sys.exit(1)
 
-    try:
-        batch_ = batch_definition.get_batch()
-        print("✅ batch chargé.", flush=True)
-    except Exception as e:
-        print(f"❌ Erreur lors du chargement batch : {e}", flush=True)
-        sys.exit(1)
-
-    results = batch_.validate(suite)
+    validation_definition = context.validation_definitions.get("titanic_raw_validation_definition")
 
 
-    #batch_parameters_dataframe = {"dataframe": df}
-    #results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
+    batch_parameters_dataframe = {None: df}
+    results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
 
 
     print(results["success"], flush=True)
