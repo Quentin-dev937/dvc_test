@@ -48,10 +48,12 @@ def validation():
 
 
     batch_parameters_dataframe = {"dataframe": df}
-    results = batch_definition.validate(batch_parameters=batch_parameters_dataframe)
+    batch = batch_definition.get_batch(batch_parameters=batch_parameters_dataframe)
+
+    validation_results = batch.validate(suite)
 
 
-    print(results["success"], flush=True)
+    print(validation_results["success"], flush=True)
 
 
 
