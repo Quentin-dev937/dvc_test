@@ -22,7 +22,8 @@ def validation():
         sys.exit(1)
 
     try:
-        context = gx.get_context(context_root_dir=str(context_root_dir))
+        #context = gx.get_context(context_root_dir=str(context_root_dir))
+        context = gx.get_context()
         print("✅ Contexte Great Expectations chargé.", flush=True)
     except Exception as e:
         print(f"❌ Erreur lors du chargement du contexte : {e}", flush=True)
