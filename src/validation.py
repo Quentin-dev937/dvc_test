@@ -22,7 +22,7 @@ def validation():
         sys.exit(1)
 
     try:
-        context = gx.get_context(context_root_dir=str(context_root_dir))
+        context = gx.get_context()
         print("✅ Contexte Great Expectations chargé.", flush=True)
     except Exception as e:
         print(f"❌ Erreur lors du chargement du contexte : {e}", flush=True)
@@ -44,11 +44,11 @@ def validation():
         sys.exit(1)
 
 
-    validation_definition = context.validation_definitions.get("titanic_raw_validation_definition")
+    batch_definition = context.data_sources.get("titanic_datasource").get_asset("titanic_raw").get_batch_definition("titanic.csv")
 
 
-    batch_parameters_dataframe = {"path": data_raw_path}
-    results = validation_definition.run(batch_parameters=batch_parameters_dataframe)
+    batch_parameters_dataframe = {"dataframe": df}
+    results = batch_definition.validate(batch_parameters=batch_parameters_dataframe)
 
 
     print(results["success"], flush=True)
