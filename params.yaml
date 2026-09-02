@@ -18,3 +18,9 @@ training:
   impute_cat_strategy: most_frequent
   n_split: 3
   scoring: f1_macro
+gx:
+  context_root_dir: great_expectations
+  suite_name: titanic_raw_suite
+  data_source: titanic_datasource
+  asset_name: titanic_raw
+  batch_definition_name: titanic.csv

@@ -12,6 +12,9 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 
 import mlflow
+import joblib
+
+THRESHOLD = 0.80
 
 def train():
     cfg = OmegaConf.load("params.yaml")
@@ -37,6 +40,8 @@ def train():
 
     with mlflow.start_run():
 
+        os.makedirs("models", exist_ok=True)
+
         rfc_scores = cross_val_score(pipeline, X=X, y=y, scoring=cfg.training.scoring, cv=cfg.training.n_split)
         mlflow.log_param("cv", cfg.training.n_split)
         mlflow.log_param("rfc-max_depth", cfg.training.max_depth)
@@ -45,7 +50,13 @@ def train():
         mlflow.log_metric("f1-macro-mean", rfc_scores_mean)
         
         pipeline.fit(X, y)
-        mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name=None)
+        joblib.dump(pipeline, "models/latest_attempt.pkl")
+
+        if rfc_scores_mean > THRESHOLD:
+            print("Promotion avec mlflow", flush=True)
+            mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name="titanic-classifier")
+            joblib.dump(pipeline, "models/production_model.pkl")
+            
 
         print(f"scoring mean: {rfc_scores}", flush=True)
 

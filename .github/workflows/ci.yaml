@@ -6,7 +6,7 @@ on:
 
 
 jobs:
-  ci:
+  ci-cd:
     runs-on: ubuntu-latest
     steps:
       - name: get python code
@@ -22,14 +22,15 @@ jobs:
           python -m pip install pip --upgrade
           pip install -r requirements.txt
 
-
-      - name: pull data with dvc
+      - name: configuration dvc
         run: |
           dvc remote modify --local r2remote access_key_id ${{ secrets.R2_ACCESS_KEY }}
           dvc remote modify --local r2remote secret_access_key ${{ secrets.R2_SECRET_KEY }}
+
+      - name: pull existing data
+        run: |
           dvc pull
           
-
       - name: validate data raw
         run: | 
           echo "Validation..."
@@ -40,4 +41,15 @@ jobs:
         run: | 
           echo "Testing..."
           pytest tests/ -v
+
+      - name: training
+        run: |
+          echo "Training"
+          dvc repro --force
+          echo "training complete !"
+
+      - name: push dvc artifact to remote
+        run: |
+          dvc push
+          echo "pushing complete"
       

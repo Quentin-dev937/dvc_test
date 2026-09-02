@@ -6,17 +6,17 @@ stages:
     deps:
     - path: conf/
       hash: md5
-      md5: a949470c2e41426ef77be35a4ec5f499.dir
-      size: 465
-      nfiles: 3
+      md5: f1eb67abf9184770a93e43cfaf45e995.dir
+      size: 669
+      nfiles: 4
     - path: data/raw/titanic.csv
       hash: md5
       md5: 2309cc5f04782ed9bb6016d9f4e381cf
       size: 61194
     - path: src/processing.py
       hash: md5
-      md5: cf62431274b5b49d33a8707a35c22713
-      size: 558
+      md5: 8abc9d11d4f595c344fc270641e7149d
+      size: 715
     outs:
     - path: data/processed/titanic.csv
       hash: md5
@@ -27,14 +27,19 @@ stages:
     deps:
     - path: conf/
       hash: md5
-      md5: a949470c2e41426ef77be35a4ec5f499.dir
-      size: 465
-      nfiles: 3
+      md5: f1eb67abf9184770a93e43cfaf45e995.dir
+      size: 669
+      nfiles: 4
     - path: data/processed/titanic.csv
       hash: md5
       md5: c631dc9ae26dd14bb539a6d7ede00e95
       size: 24074
     - path: src/training.py
       hash: md5
-      md5: 8c704ff54900aba58bdd48b84518fc76
-      size: 2164
+      md5: e7e6939c897267e4df9b4081fa659657
+      size: 2506
+    outs:
+    - path: models/production_model.pkl
+      hash: md5
+      md5: 15897e33193465c205a965bf017d9f96
+      size: 1228939

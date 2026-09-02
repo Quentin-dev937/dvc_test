@@ -14,3 +14,5 @@ stages:
     - data/processed/titanic.csv
     - src/training.py
     - conf/
+    outs:
+    - models/production_model.pkl
