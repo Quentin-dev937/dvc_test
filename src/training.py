@@ -33,7 +33,7 @@ def train():
     else:
         # En local, on garde votre config habituelle
         remote_server_uri = "sqlite:///mlflow.db"
-        
+
     mlflow.set_tracking_uri(remote_server_uri)
     mlflow.set_experiment("titanic-mlops-1")
 
