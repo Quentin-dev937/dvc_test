@@ -26,7 +26,14 @@ trusted_types = [
 def train():
     cfg = OmegaConf.load("params.yaml")
 
-    remote_server_uri = "sqlite:///mlflow.db"
+    if os.getenv("GITHUB_ACTIONS") == "true":
+        remote_server_uri = "sqlite:///tmp/mlflow.db"
+        # On s'assure que le dossier existe
+        os.makedirs("/tmp", exist_ok=True) 
+    else:
+        # En local, on garde votre config habituelle
+        remote_server_uri = "sqlite:///mlflow.db"
+        
     mlflow.set_tracking_uri(remote_server_uri)
     mlflow.set_experiment("titanic-mlops-1")
 
