@@ -16,6 +16,13 @@ import joblib
 
 THRESHOLD = 0.80
 
+trusted_types = [
+    'builtins.object',
+    'numpy.dtype',
+    'numpy.number',
+    'sklearn.compose._column_transformer.make_column_selector'
+]
+
 def train():
     cfg = OmegaConf.load("params.yaml")
 
@@ -54,7 +61,7 @@ def train():
 
         if rfc_scores_mean > THRESHOLD:
             print("Promotion avec mlflow", flush=True)
-            mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name="titanic-classifier")
+            mlflow.sklearn.log_model(sk_model=pipeline, name="titanic-rfc", input_example=X.iloc[[0]], registered_model_name="titanic-classifier", skops_trusted_types=trusted_types)
             joblib.dump(pipeline, "models/production_model.pkl")
             
 
