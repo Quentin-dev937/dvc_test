@@ -49,7 +49,7 @@ jobs:
           echo "training complete !"
 
       - name: push dvc artifact to remote
-        if: github.ref == "refs/heads/main"
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           dvc push
           echo "pushing complete"
