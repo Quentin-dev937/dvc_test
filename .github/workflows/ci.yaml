@@ -2,7 +2,7 @@ name: titanic mlops CI
 
 on: 
   push: 
-    branches: [main]
+    branches: [main, "**"]
 
 
 jobs:
